@@ -1,7 +1,7 @@
 ---
 title:  "디스크 사용량"
 classes: wide
-date: 2018-01-10duT20:25:00+09:00
+date: 2018-01-10T20:25:00+09:00
 categories: [devops, linux]
 tags: [linux, disk]
 ---
