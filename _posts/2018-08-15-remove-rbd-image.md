@@ -3,7 +3,7 @@ title:  "Ceph rbd 이미지 삭제하기"
 classes: wide
 date: 2018-08-15T15:13:00+09:00
 categories: [devops, ceph]
-tags: [kubernetes, ceph, rbd, ops-log]
+tags: [kubernetes, ceph, rbd]
 ---
 
 # 상황
