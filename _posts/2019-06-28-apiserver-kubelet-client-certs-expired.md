@@ -1,5 +1,5 @@
 ---
-title:  "kubernetes apiserver-kubelet-client 인증서 만료"
+title:  "kubernetes 인증서 만료"
 classes: wide
 date: 2019-06-28T20:51:00+09:00
 categories: [devops, kubernetes]
