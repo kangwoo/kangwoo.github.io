@@ -129,10 +129,11 @@ OR
 ```
 <br/>
 
-이제, 마스터 서버에 있는 `apiserver`와 `kubelet`을 재시작한다.
-`kubelet`이 재시작할 때, `apiserver`를 실행시켜주기 때문에, `docker` 명령어로 죽여버렸다.
+이제, 마스터 서버에 있는 `apiserver`, `controller-manager` `scheduler`를 재시작 한, `kubelet`도 재시작한다.
 ```bash
-# docker stop fdd294139c9c
+# sudo kill -s SIGHUP $(pidof kube-apiserver)
+# sudo kill -s SIGHUP $(pidof kube-controller-manager)
+# sudo kill -s SIGHUP $(pidof kube-scheduler)
 # systemctl restart kubelet
 
 ```
