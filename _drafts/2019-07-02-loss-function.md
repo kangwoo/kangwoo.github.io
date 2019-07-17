@@ -20,18 +20,32 @@ mathjax: true
 절댓값을 사용하는 방식은, 최저점 근처에서 기울기 작아지지 않기 때문에 오버슈팅할 가능성이 높지만 이상치(outlier) 덜 민감하다.
 이에 반해서 제곱오차 방식은 최저점에 접근함에 따라 이굴기가 작아지므로 목표물을 오버슈팅할 가능성이 낮지만, 이상치에 민감하다.
 
-### 제곱 오차(Squared Error)
 
 ### 평균 제곱 오차(MSE, Mean Squared Error)
-MSE = \frac{1}{N} \sum_{i=1}^N (y_i - \hat{y}_i)^2
+목표값과 예측값의 차이를 제곱한 값의 편균이다.
+
+
+L(Y, hat{y}) = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
+
+텐서플로에서 표현하면 다음과 같다.
+```python
+loss = tf.reduce_mean(tf.square(y - y_pred))
+```
+### 교차 엔트로피 오차(CEE, Cross Entropy Error)
+교차 엔트로피는 다음과 같이 정의된다.
+
+H(p, q) = - \sum_x p(x) \log q(x) 
 
 ```python
-def mean_squared_error(y, t):
-    return ((y-t)**2).mean(axis=None)
+loss = -y*tf.log(y_pred) - (1-y)*tf.log(1-y_pred)
+loss = tf.reduce_mean(losgg)
 ```
-### 교차 엔트로프 오차(CEE, Cross Entropy Error)
-H(y, \hat{y}) = \sum_i y_i \log \frac{1}{\hat{y}_i} = -\sum_i y_i \log \hat{y}_i
 
+텐서플로에서 표현하면 다음과 같다.
+```python
+loss = tf.nn.sigmoid_cross_entropy_with_logits(labels=y, logits=y_pred)
+loss = tf.reduce_mean(loss)
+```
 
 
 # Refrences

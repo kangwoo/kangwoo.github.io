@@ -51,7 +51,34 @@ sudo pkill -SIGHUP dockerd
 설치가 끌나면, 아래처럼 `--runtime=nvidia` 플래그를 이용해서 GPU를 사용할 수 있습니다. 
 아래 명령어를 실행하면 GPU를 사용할 수 있는 상태인지 확인할 수 있습니다.
 ```bash
-docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi
+$ docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi
+Mon Jul 15 12:45:56 2019
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 418.67       Driver Version: 418.67       CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla M40           Off  | 00000000:02:00.0 Off |                    0 |
+| N/A   35C    P0    63W / 250W |    115MiB / 11448MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  Tesla M40           Off  | 00000000:82:00.0 Off |                    0 |
+| N/A   26C    P8    16W / 250W |      0MiB / 11448MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   2  Tesla M40           Off  | 00000000:85:00.0 Off |                    0 |
+| N/A   24C    P8    16W / 250W |      0MiB / 11448MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   3  Tesla M40           Off  | 00000000:86:00.0 Off |                    0 |
+| N/A   24C    P8    16W / 250W |     11MiB / 11448MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0     21141      C   python                                       104MiB |
++-----------------------------------------------------------------------------+
+
 ```
 
 <br/>
@@ -81,7 +108,7 @@ sudo systemctl restart docker
 ## kubernetes-device-plugin 설치
 `kubectl`을 이용해서 `nvidia-device-plugin`을 설치해 줍니다.
 ```bash
-kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v1.11/nvidia-device-plugin.yml
+kubectl apply -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v1.11/nvidia-device-plugin.yml
 
 ```
 참고) nvidia-device-plugin.yml
@@ -148,3 +175,4 @@ spec:
 # 참고 문서
 - <https://github.com/NVIDIA/nvidia-docker>
 - <https://github.com/NVIDIA/k8s-device-plugin>
+- <https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/>

@@ -131,9 +131,9 @@ OR
 
 이제, 마스터 서버에 있는 `apiserver`, `controller-manager` `scheduler`를 재시작 한, `kubelet`도 재시작한다.
 ```bash
-# sudo kill -s SIGHUP $(pidof kube-apiserver)
-# sudo kill -s SIGHUP $(pidof kube-controller-manager)
-# sudo kill -s SIGHUP $(pidof kube-scheduler)
+# kill -s SIGHUP $(pidof kube-apiserver)
+# kill -s SIGHUP $(pidof kube-controller-manager)
+# kill -s SIGHUP $(pidof kube-scheduler)
 # systemctl restart kubelet
 
 ```
