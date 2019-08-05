@@ -31,7 +31,7 @@ $ cd jupyter-operator
 그래서 `hg`도 'brew'를 사용해서 설치하였다. 'hg'는 [Mercurial]<https://www.mercurial-scm.org/> 이라는 크로스 플랫폼 분산 버전 관리 도구의 명령툴이다.
 
 ```bash
-$ operator-sdk new jupyter-operator2 --repo jupyter-operator
+$ operator-sdk new jupyter-operator --repo jupyter-operator
 ...
 go: finding github.com/operator-framework/operator-sdk master
 go: bitbucket.org/ww/goautoneg@v0.0.0-20120707110453-75cd24fc2f2c: hg clone -U https://bitbucket.org/ww/goautoneg . in /Users/lineplus/go/pkg/mod/cache/vcs/59c2185b80ea440a7c3b8c5eff3d8abb68c53dea1f20f615370c924c4150b27f: exec: "hg": executable file not found in $PATH
@@ -43,6 +43,38 @@ Error: failed to exec []string{"go", "build", "./..."}: exit status 1
 $ brew install hg
 ```
 
+$ operator-sdk add api --api-version=colab.linecorp.com/v1alpha1 --kind=Jupyter
+INFO[0000] Generating api version colab.linecorp.com/v1alpha1 for kind Jupyter.
+INFO[0000] Created pkg/apis/colab/group.go
+INFO[0003] Created pkg/apis/colab/v1alpha1/jupyter_types.go
+INFO[0003] Created pkg/apis/addtoscheme_colab_v1alpha1.go
+INFO[0003] Created pkg/apis/colab/v1alpha1/register.go
+INFO[0003] Created pkg/apis/colab/v1alpha1/doc.go
+INFO[0003] Created deploy/crds/colab_v1alpha1_jupyter_cr.yaml
+INFO[0011] Created deploy/crds/colab_v1alpha1_jupyter_crd.yaml
+INFO[0011] Running deepcopy code-generation for Custom Resource group versions: [colab:[v1alpha1], ]
+INFO[0019] Code-generation complete.
+INFO[0019] Running OpenAPI code-generation for Custom Resource group versions: [colab:[v1alpha1], ]
+INFO[0036] Created deploy/crds/colab_v1alpha1_jupyter_crd.yaml
+INFO[0036] Code-generation complete.
+INFO[0036] API generation complete.
+
+
+$ operator-sdk add controller --api-version=colab.linecorp.com/v1alpha1 --kind=Jupyter
+INFO[0000] Generating controller version colab.linecorp.com/v1alpha1 for kind Jupyter.
+INFO[0000] Created pkg/controller/jupyter/jupyter_controller.go
+INFO[0000] Created pkg/controller/add_jupyter.go
+INFO[0000] Controller generation complete.
+
+
+
+$ operator-sdk build docker-registry.linecorp.com/kangwoo/jupyter-operator:latest        
+
+operator-sdk generate k8s
+ 
+operator-sdk generate openapi
+
 ## 참고 자료
 - https://github.com/operator-framework/operator-sdk/blob/master/doc/user/install-operator-sdk.md
-
+- https://github.com/operator-framework/operator-sdk/blob/master/doc/user-guide.md
+- https://github.com/operator-framework/operator-sdk/blob/master/doc/operator-scope.md
