@@ -2,7 +2,7 @@
 title:  "Machine Learning"
 classes: wide
 date: 2018-02-06T13:15:00+09:00
-categories: [devops, machine learning]
+categories: [data science, machine learning]
 tags: [machine learning, data science]
 ---
 

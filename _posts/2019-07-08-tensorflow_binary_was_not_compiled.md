@@ -2,7 +2,7 @@
 title:  "Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA"
 classes: wide
 date: 2019-07-02T07:21:10+09:00
-categories: [devops, machine learning]
+categories: [data science, machine learning]
 tags: [machine learning, data science, tensorflow]
 mathjax: true
 ---
