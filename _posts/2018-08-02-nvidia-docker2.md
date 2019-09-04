@@ -95,9 +95,9 @@ Mon Jul 15 12:45:56 2019
   "runtimes": {
     "nvidia": {
       "path": "nvidia-container-runtime",
-      "runtimeArgs": [],
-    },
-  },
+      "runtimeArgs": []
+    }
+  }
 }
 ```
 파일을 수정한 후, docker daemon을 재시작 하여야합니다.

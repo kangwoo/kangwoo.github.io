@@ -79,6 +79,31 @@ build/run.sh make kubeadm KUBE_BUILD_PLATFORMS=linux/amd64
 생성한 파일을 서버로 이동해서, 설치하시면 됩니다.
 
 
+## 다른 방법
+```bash
+- name: check if we need to re-assign ip
+  shell: |
+    if ip addr show eth0.100 > /dev/null; then
+      ip addr show eth0.100 | grep 'inet ' > /dev/null;
+    else
+      true;
+    fi;
+  # need_to_reassign.rc = 0
+  #  => not need to reassign
+  # need_to_reassign.rc = 1
+  #  => need to reassign
+  register: need_to_reassign
+  changed_when: False
+  ignore_errors: True
+   
+- name: re-assing ip onto ethX.100
+  shell: |
+    private_ip=$(/sbin/ip a show dev private | grep 'inet '  | awk '{print $2}') && /sbin/ip addr add ${private_ip} dev eth0.100 && /sbin/ip addr add ${private_ip} dev eth1.100
+  when: need_to_reassign.rc != 0
+
+```
+
+
 # 참고 문서
 - https://github.com/kubernetes/kubeadm/issues/1156
 - https://github.com/kubernetes/kubernetes/pull/69578
