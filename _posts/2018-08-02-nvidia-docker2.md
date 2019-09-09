@@ -155,6 +155,12 @@ spec:
             path: /var/lib/kubelet/device-plugins
 ```
 
+## 참고 : Feature Gates
+ `nvidia-device-plugin`을 사용하려면, 해당 노드 kubelet의 DevicePlugins이 "true"로 설정되어 있어야한다.
+쿠버네티스 1.10 이상에서는 기본값이 "true"이기 때문에 별도의 설정이 필요없으나, 
+혹시라도 1.8이나 1.9를 사용한다면, `KUBELET_EXTRA_ARGS=--feature-gates=DevicePlugins=true` 로 값을 설정해주어야한다.
+ - https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/
+
 ## GPU 자원(Resource) 이용
 GPU 자원을 이용하려면, 리소스 요구사항에 `nvidia.com/gpu`을 사용하면 됩니다.
 
