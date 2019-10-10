@@ -7,7 +7,7 @@ tags: [kubernetes, etcd]
 ---
 
 ## etcd 모니터링 하기
-etcd 클러스터는 `/metrics` 라는, 프로메테우스가 수집할 수 있는 매트릭 엔드 포인트를 제공한다.
+`etcd`는 `/metrics` 라는, 프로메테우스가 수집할 수 있는 매트릭 엔드 포인트를 제공한다.
 하지만, Secure Etcd 클러스터인 경우에는 해당 엔드 포인트에 접근하기 위해서는 인증서가 필요하다.
 
 (다른 방법으로는 `/metrics` 엔드 포인트를 다른 포트로 분리하여, 인증서 없이 접근할 수도 있다. `--listen-metrics-urls` 옵션을 참고 바란다.)
@@ -15,12 +15,13 @@ etcd 클러스터는 `/metrics` 라는, 프로메테우스가 수집할 수 있�
 
 ## 환경
 `helm`을 사용해서 `prometheus-operator`를 설치할 것이다. 
-그래서 `prometheus-operator`를 설치할때, `etcd`를 모니터링하도록 변경한 설정 파일을 사용한다.
-`kubeEtcd.serviceMonitor`의 값들을 변경한다. `scheme`를 https로 변경하고, 인증서 정보를 등록한다.
+그래서 `prometheus-operator`를 설치할때, `etcd`를 모니터링하도록 설정 파일을 변경해서 사용한다.
 
 ## values.yaml 수정하기
 
 ### kubeEtcd
+`kubeEtcd.serviceMonitor`의 값들을 변경한다. `scheme`를 https로 변경하고, 인증서 정보를 등록한다.
+
 ```bash
 ## Component scraping etcd
 ##
@@ -88,7 +89,8 @@ prometheus:
 
 
 ## 인증서 복사하기
-`etcd` 인증서를, 프로메테스를 설치할, `monitoring` 네임스페이스에 복사한다.
+`etcd` 인증서를, 프로메테스를 설치할 `monitoring` 네임스페이스에,
+ `etcd-client-cert`란 이름의 `secret`로 복사한다.
 
 ```bash
 POD_NAME=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}' -l component=kube-apiserver -n kube-system)
@@ -121,4 +123,6 @@ kubectl delete --ignore-not-found customresourcedefinitions \
 ``` 
 
 ## 참고 링크
+- https://github.com/helm/charts/tree/master/stable/prometheus-operator
+- https://github.com/kubernetes-monitoring/kubernetes-mixin
 - https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/monitoring.md
