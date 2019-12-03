@@ -153,4 +153,4 @@ Pod 조회하기
 ![pods](/assets/img/2019/12/k9s-po.png)
 
 로그 보기
-![logs](/assets/img/2019/12/k9s-po.png)
+![logs](/assets/img/2019/12/k9s-logs.png)
