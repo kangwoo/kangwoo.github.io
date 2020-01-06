@@ -96,7 +96,8 @@ notAfter=Jan 23 08:05:17 2020 GMT
 ```
 <br/>
 
-그런 다음 `kubeadm`을 이용해서 인증서를 다시 생성하였다
+그런 다음 `kubeadm`을 이용해서 인증서를 다시 생성하였다. 인증서를 생성할때 `localhost`, `127.0.0.1`, `172.16.0.1`를 같이 넣으주는게 좋다.
+`172.16.0.1`는 `kubernetes.default` 서비스의 클러스터 아이피이다.
 ```bash
 # kubeadm alpha phase certs apiserver --apiserver-cert-extra-sans '10.x.u.z,kube-master.xxx.com'
 [certificates] Generated apiserver certificate and key.
@@ -148,3 +149,11 @@ OR
 ## 마무리
 - 아마 인증서가 동시에 만료되었으면 다른 에러가 발생했을거 같다.
 - 인증서마 만료되기 전에 미리미리 갱신하자.
+
+
+## 추가사항
+쿠버네티스가 업데이트가 됨에 따라서, kubeadm 의 명령어로 약간 바꼈다.
+1.15.x 버전에서는 `kubeadm alpha certs renew all` 명령어를 사용하면, 간단히 인증서를 갱신할 수 있다.
+참고로, `kubeadm alpha phase certs`는 `kubeadm init phase certs`로 변경되었고,
+`kubeadm alpha phase kubeconfig`도 `kubeadm init phase kubeconfig`로 변경되었다.
+
