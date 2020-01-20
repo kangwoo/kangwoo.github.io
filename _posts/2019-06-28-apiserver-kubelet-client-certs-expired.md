@@ -96,8 +96,7 @@ notAfter=Jan 23 08:05:17 2020 GMT
 ```
 <br/>
 
-그런 다음 `kubeadm`을 이용해서 인증서를 다시 생성하였다. 인증서를 생성할때 `localhost`, `127.0.0.1`, `172.16.0.1`를 같이 넣으주는게 좋다.
-`172.16.0.1`는 `kubernetes.default` 서비스의 클러스터 아이피이다.
+그런 다음 `kubeadm`을 이용해서 인증서를 다시 생성하였다.
 ```bash
 # kubeadm alpha phase certs apiserver --apiserver-cert-extra-sans '10.x.u.z,kube-master.xxx.com'
 [certificates] Generated apiserver certificate and key.
